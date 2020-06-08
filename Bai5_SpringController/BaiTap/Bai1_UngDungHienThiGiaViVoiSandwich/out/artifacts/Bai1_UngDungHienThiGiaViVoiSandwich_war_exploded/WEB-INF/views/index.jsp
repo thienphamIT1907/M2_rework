@@ -19,15 +19,7 @@
         <label>
             <input type="checkbox" name="condiment" value="Sprouts" >Sprouts
         </label>
-        <input type="submit" value="Save" onclick="sendData()">
+        <input type="submit" value="Save">
     </form>
-
-    <script>
-        function sendData() {
-            let condimentData= document.getElementById("lettuce").value;
-            alert(condimentData);
-        }
-
-    </script>
 </body>
 </html>

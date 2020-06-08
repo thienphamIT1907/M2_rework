@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import services.SanwichService;
 
+import java.util.Optional;
+
 @Controller
 public class SandwichController {
 
@@ -29,12 +31,15 @@ public class SandwichController {
 //    }
 
     @PostMapping("/save")
-    public String sandwich(@RequestParam("condiment") String[] condimentsArr, Model model) {
-        if(sanwichService.isEmptyCondiments(condimentsArr)) {
+    public String sandwich(@RequestParam(value = "condiment", required = false) Optional<String[]> condimentsArr,
+                           Model model) {
+
+        if(condimentsArr.isEmpty()) {
             model.addAttribute("message", "Nothing to cooking!");
+            return "save";
         } else {
             Sanwich sw = new Sanwich();
-            sw.setCondiments(condimentsArr);
+            sw.setCondiments(condimentsArr.get());
             model.addAttribute("message", "Your sandwich is cooking with: ");
             model.addAttribute("finishSandwich", sanwichService.cookingSanwich(sw));
         }
