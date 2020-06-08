@@ -5,9 +5,9 @@
     <title>Save Condiments</title>
 </head>
 <body>
-    <h1>${message}</h1>
+    <h1>${message}</h1><br>
     <h3>
-        <c:forEach  var = "condiment" items="${condimentsArr}">
+        <c:forEach  var = "condiment" items="${finishSandwich}">
             <c:out value="${condiment}"/><br>
         </c:forEach>
     </h3>
