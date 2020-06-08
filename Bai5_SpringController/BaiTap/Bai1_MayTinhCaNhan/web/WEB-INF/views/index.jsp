@@ -12,14 +12,23 @@
         <input type="submit" name="operator" value="Addition (+)">
         <input type="submit" name="operator" value="Subtraction (-)">
         <input type="submit" name="operator" value="Multiplication (*)">
-        <input type="submit" name="operator" value="Division (/)">
+        <input type="submit" name="operator" value="Division (/)" onclick="clickDivision()">
     </form>
 
     <hr/>
 
     <h2>Result</h2>
     <label>
-        <input type="text" disabled value="${result}">
+        <input id="result" type="text" disabled value="${result}">
     </label>
+
+    <script>
+        let rs = document.getElementById("result").value;
+        function clickDivision() {
+            if(rs === 0) {
+                alert('Cannot divison by 0');
+            }
+        }
+    </script>
 </body>
 </html>

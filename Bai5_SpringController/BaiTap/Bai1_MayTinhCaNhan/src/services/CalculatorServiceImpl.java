@@ -21,14 +21,15 @@ public class CalculatorServiceImpl implements CalculatorService {
     }
 
     @Override
-    public float division(float num1, float num2) {
+    public String division(float num1, float num2) {
         try {
-            if(num1 != 0 || num2 != 0) {
-                return num1 / num2;
+            if(num2 != 0) {
+                float result = num1 / num2;
+                return String.valueOf(result);
             }
         } catch (IllegalArgumentException ex) {
-            ex.getMessage();
+            return ex.getMessage();
         }
-        return 0;
+        return "Cannot divison by 0";
     }
 }

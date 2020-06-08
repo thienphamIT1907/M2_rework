@@ -37,12 +37,7 @@ public class CalculatorController {
                 model.addAttribute("result", calculatorService.multiplication(num1, num2));
                 break;
             case "Division (/)":
-                float result = calculatorService.division(num1, num2);
-                if(result == 0) {
-                    String noti = "Cannot division by 0";
-                    model.addAttribute("result", noti);
-                }
-                model.addAttribute("result", result);
+                model.addAttribute("result", calculatorService.division(num1, num2));
         }
         return "index";
     }

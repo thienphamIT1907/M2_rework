@@ -8,5 +8,5 @@ public interface CalculatorService {
 
     float multiplication(float num1, float num2);
 
-    float division(float num1, float num2);
+    String division(float num1, float num2);
 }
