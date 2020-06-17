@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>View Blog</h1>
+<table th:object="${blog}">
+    <tr>
+        <td>Title:</td>
+        <td><input type="text" disabled th:value="*{getTitle()}"></td>
+    </tr>
+    <tr>
+        <td>Content:</td>
+        <td><textarea th:text="*{getContent()}" cols="30" rows="10" disabled></textarea></td>
+    </tr>
+    <tr>
+        <td><a th:href="@{/}">Back</a></td>
+    </tr>
+</table>
+</body>
+</html>
