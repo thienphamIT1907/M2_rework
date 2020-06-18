@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Homepage Blog</title>
+</head>
+<body>
+    <h1>List Blog</h1>
+    <a th:href="@{/create_blog}">Add new Blog</a>
+    <a th:href="@{/}">Back to main menu</a>
+
+    <th:block th:if="${message}">
+        <p th:text="${message}"></p>
+    </th:block>
+
+    <form th:action="@{/blogs}" method="get">
+        <input type="text" name="keyword">
+        <input type="submit" value="Search">
+    </form>
+
+    <div>
+        <a th:href="@{/blogs(keyword=${keyword},page=${blog.number - 1})}" th:if="${blog.hasPrevious()}">Previous</a>
+        <span th:text="${blog.number + 1}"></span>/<span th:text="${blog.totalPages}"></span>
+        <a th:href="@{/blogs(keyword=${keyword},page=${blog.number + 1})}" th:if="${blog.hasNext()}">Next</a>
+    </div>
+
+    <table border="1" cellpadding="5">
+        <tr>
+            <th>No.</th>
+            <th>Title</th>
+            <th>Content</th>
+            <th>Category</th>
+        </tr>
+        <tr th:each="item: ${blog}">
+            <td th:text="${item.getId()}"></td>
+            <td th:text="${item.getTitle()}"></td>
+            <td th:text="${item.getContent()}"></td>
+            <td th:text="${item.category.categoryName}"></td>
+            <td><a th:href="@{view_blog/__${item.getId()}__}">View</a></td>
+            <td><a th:href="@{edit_blog/__${item.getId()}__}">Edit</a></td>
+            <td><a th:href="@{delete_blog/__${item.getId()}__}">Delete</a></td>
+        </tr>
+    </table>
+</body>
+</html>
