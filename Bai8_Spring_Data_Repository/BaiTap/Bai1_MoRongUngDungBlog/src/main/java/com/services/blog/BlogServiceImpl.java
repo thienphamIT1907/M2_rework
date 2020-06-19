@@ -38,4 +38,18 @@ public class BlogServiceImpl implements BlogService {
     public Page<Blog> findAllByTitleContaining(String title, Pageable pageable) {
         return blogRepository.findAllByTitleContaining(title, pageable);
     }
+
+    @Override
+    public Page<Blog> findAllByTitleContainingOrContentContainingOrCategory_CategoryNameOrderById(
+            String title,
+            String content,
+            String categoryName,
+            Pageable pageable) {
+        return blogRepository.findAllByTitleContainingOrContentContainingOrCategory_CategoryNameOrderById(
+                title,
+                content,
+                categoryName,
+                pageable
+        );
+    }
 }

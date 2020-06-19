@@ -38,7 +38,12 @@ public class BlogController {
     ) {
         Page<Blog> blogPage;
         if (keyword.isPresent()) {
-            blogPage = blogService.findAllByTitleContaining(keyword.get(), pageable);
+            blogPage = blogService.findAllByTitleContainingOrContentContainingOrCategory_CategoryNameOrderById(
+                            keyword.get(),
+                            keyword.get(),
+                            keyword.get(),
+                            pageable
+                    );
             model.addAttribute("keyword", keyword.get());
         } else {
             blogPage = blogService.findAll(pageable);

@@ -15,4 +15,11 @@ public interface BlogService {
     void deleteBlogById(Integer id);
 
     Page<Blog> findAllByTitleContaining(String title, Pageable pageable);
+
+    Page<Blog> findAllByTitleContainingOrContentContainingOrCategory_CategoryNameOrderById(
+            String title,
+            String content,
+            String categoryName,
+            Pageable pageable
+    );
 }
