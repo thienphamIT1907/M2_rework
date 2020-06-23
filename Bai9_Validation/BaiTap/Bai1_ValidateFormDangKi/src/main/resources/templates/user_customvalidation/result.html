@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Info</title>
+</head>
+<body>
+    <h1>User's information</h1>
+    <table th:object="${userCustomValidation}">
+        <tr>
+            <td>Firstname: </td>
+            <td><input type="text" disabled th:value="*{firstName}"></td>
+        </tr>
+        <tr>
+            <td>Lastname: </td>
+            <td><input type="text" disabled th:value="*{lastName}"></td>
+        </tr>
+        <tr>
+            <td>Phone number: </td>
+            <td><input type="text" disabled th:value="*{phoneNumber}"></td>
+        </tr>
+        <tr>
+            <td>Age: </td>
+            <td><input type="text" disabled th:value="*{age}"></td>
+        </tr>
+        <tr>
+            <td>Email: </td>
+            <td><input type="text" disabled th:value="*{email}"></td>
+        </tr>
+    </table>
+    <a th:href="@{/}">Back to main menu</a>
+</body>
+</html>

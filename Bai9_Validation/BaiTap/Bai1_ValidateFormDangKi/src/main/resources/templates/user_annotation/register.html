@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <style>
+        body {
+            font-family: "Fira Code",serif;
+            background: url("https://i.pinimg.com/originals/93/aa/2d/93aa2db15db9665a8c26c08994c0626c.png");
+            background-size: cover;
+        }
+
+        span {
+            color: #e92a2a;
+            background: yellowgreen;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+<h1>Create user using annotation</h1>
+
+<form th:action="@{/create_userAnnotation}" method="post" th:object="${userAnnotation}">
+    <table>
+        <tr>
+            <td>First name:</td>
+            <td><input type="text" th:field="*{firstName}"></td>
+            <td><span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span></td>
+        </tr>
+
+        <tr>
+            <td>Last name:</td>
+            <td><input type="text" th:field="*{lastName}"></td>
+            <td><span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span></td>
+        </tr>
+
+        <tr>
+            <td>Phone number:</td>
+            <td><input type="text" th:field="*{phoneNumber}"></td>
+            <td><span th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></span></td>
+        </tr>
+
+        <tr>
+            <td>Age:</td>
+            <td><input type="number" th:field="*{age}" value=""></td>
+            <td><span th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span></td>
+        </tr>
+
+        <tr>
+            <td>Email:</td>
+            <td><input type="text" th:field="*{email}"></td>
+            <td><span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span></td>
+        </tr>
+
+        <tr>
+            <td>Birthday:</td>
+            <td><input type="date" th:field="*{birthday}"></td>
+            <td><span th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}"></span></td>
+        </tr>
+    </table>
+    <input type="submit" value="Create">
+</form>
+</body>
+</html>
