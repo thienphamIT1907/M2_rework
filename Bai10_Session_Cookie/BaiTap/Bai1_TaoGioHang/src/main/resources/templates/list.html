@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: head"></head>
+<body>
+<h1>List Product</h1>
+<p>
+    <a th:href="@{/view_cart}">View cart</a>
+</p>
+<div class="notify">
+    <div th:if="${status}">
+        <span th:text="${status}"></span>
+    </div>
+</div>
+<table id = "products" align="center">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Amount</th>
+        <th>Detail</th>
+        <th>Image</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${products}">
+        <td th:text="${item.getIdProduct()}"></td>
+        <td th:text="${item.getNameProduct()}"></td>
+        <td th:text="${item.getPrice()}"></td>
+        <td th:text="${item.getAmount()}"></td>
+        <td th:text="${item.getDetail()}"></td>
+        <td><img th:src="@{'/images/product/' + ${item.getImageProduct()}}" alt=""
+                 style="width: 200px"></td>
+        <td><a th:href="@{'/add_product_to_cart/'+ ${item.getIdProduct()}}">Add to cart</a></td>
+    </tr>
+    </tbody>
+</table>
+<footer th:replace="layout :: footer"></footer>
+</body>
+</html>
