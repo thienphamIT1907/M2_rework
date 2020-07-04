@@ -1,6 +1,8 @@
 package com.models.DichVuModels;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -21,6 +23,7 @@ public class DichVuDiKem {
     private Long donVi;
 
     @Column
+    @Min(value = 0, message = "Giá > 0")
     private Long gia;
 
     public DichVuDiKem() {

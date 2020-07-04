@@ -3,6 +3,8 @@ package com.models.NhanVienModels;
 import com.models.DichVuModels.HopDong;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -44,6 +46,8 @@ public class NhanVien {
     @Column
     private String email;
 
+    @NotNull(message = "Không được để trống")
+    @Min(value = 0, message = "Lương > 0")
     @Column
     private Long luong;
 

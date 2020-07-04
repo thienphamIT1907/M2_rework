@@ -15,7 +15,7 @@ public class BoPhanServiceImpl implements BoPhanService {
     BoPhanRepository boPhanRepository;
 
     @Override
-    public List<BoPhan> findAll() {
+    public Iterable<BoPhan> findAll() {
         return boPhanRepository.findAll();
     }
 

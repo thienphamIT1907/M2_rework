@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface NhanVienService {
 
-    List<NhanVien> findAll();
+    Iterable<NhanVien> findAll();
 
     void them(NhanVien nhanVien);
 

@@ -15,7 +15,7 @@ public class ViTriServiceImpl implements ViTriService {
     ViTriRepository viTriRepository;
 
     @Override
-    public List<ViTri> findAll() {
+    public Iterable<ViTri> findAll() {
         return viTriRepository.findAll();
     }
 

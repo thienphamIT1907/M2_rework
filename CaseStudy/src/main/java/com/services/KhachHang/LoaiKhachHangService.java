@@ -6,5 +6,7 @@ import java.util.List;
 
 public interface LoaiKhachHangService {
 
-    List<LoaiKhachHang> findAll();
+    Iterable<LoaiKhachHang> findAll();
+
+    LoaiKhachHang timTheoId(Long id);
 }

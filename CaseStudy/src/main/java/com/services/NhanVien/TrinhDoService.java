@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface TrinhDoService {
 
-    List<TrinhDo> findAll();
+    Iterable<TrinhDo> findAll();
 
     void them(TrinhDo trinhDo);
 

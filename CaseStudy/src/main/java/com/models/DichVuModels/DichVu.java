@@ -1,6 +1,10 @@
 package com.models.DichVuModels;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 
 @Entity
@@ -22,37 +26,53 @@ public class DichVu {
     @OneToMany(targetEntity = HopDong.class, mappedBy = "dichVu")
     private List<HopDong> listHopDong;
 
+    @NotEmpty(message = "Không để trống !")
     @Column
     private String tenDichVu;
 
+    @NotNull(message = "Không để trống !")
     @Column
     private Long dienTichSuDung;
 
+    @NotNull(message = "Không để trống !")
     @Column
     private Long chiPhiThue;
 
+    @NotNull(message = "Không để trống !")
+    @Min(value = 0, message = "Số người > 0")
     @Column
     private Long soNguoiToiDa;
 
+    @NotEmpty(message = "Không để trống !")
     @Column
     private String tieuChuanPhong;
 
+    @NotEmpty(message = "Không để trống !")
     @Column
     private String moTaTienNghiKhac;
 
+    @NotNull(message = "Không để trống !")
     @Column
     private Long dienTichHoBoi;
 
+    @NotNull(message = "Không để trống !")
+    @Min(value = 0, message = "Số tầng > 0")
     @Column
     private Long soTang;
 
     @Column
     private boolean trangThai;
 
+    @NotEmpty(message = "Không để trống !")
+    @Column
+    @Pattern(regexp = "^KH-\\d{4}$", message = "Định dạng DV-XXXX")
+    private String maDichVu;
+
     public DichVu() {
     }
 
-    public DichVu(String tenDichVu, Long dienTichSuDung, Long chiPhiThue, Long soNguoiToiDa, String tieuChuanPhong, String moTaTienNghiKhac, Long dienTichHoBoi, Long soTang, boolean trangThai) {
+    public DichVu(String tenDichVu, Long dienTichSuDung, Long chiPhiThue, Long soNguoiToiDa, String tieuChuanPhong,
+                  String moTaTienNghiKhac, Long dienTichHoBoi, Long soTang, boolean trangThai, String maDichVu) {
         this.tenDichVu = tenDichVu;
         this.dienTichSuDung = dienTichSuDung;
         this.chiPhiThue = chiPhiThue;
@@ -62,6 +82,7 @@ public class DichVu {
         this.dienTichHoBoi = dienTichHoBoi;
         this.soTang = soTang;
         this.trangThai = trangThai;
+        this.maDichVu = maDichVu;
     }
 
     public Long getIdDichVu() {
@@ -166,6 +187,14 @@ public class DichVu {
 
     public void setTrangThai(boolean trangThai) {
         this.trangThai = trangThai;
+    }
+
+    public String getMaDichVu() {
+        return maDichVu;
+    }
+
+    public void setMaDichVu(String maDichVu) {
+        this.maDichVu = maDichVu;
     }
 }
 

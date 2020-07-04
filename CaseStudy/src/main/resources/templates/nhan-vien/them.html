@@ -24,12 +24,6 @@
 
     <!-- Main CSS-->
     <link href="/form/css/main.css" rel="stylesheet" media="all">
-
-    <style th:fragment="span-error">
-        span {
-            color: #e25d5d;
-        }
-    </style>
 </head>
 
 <body>
@@ -44,14 +38,12 @@
                             <div class="input-group">
                                 <label class="label">Họ tên</label>
                                 <input class="input--style-4" type="text" th:field="*{hoTen}">
-                                <span th:if="${#fields.hasErrors()}" th:errors="*{hoTen}"></span>
                             </div>
                         </div>
                         <div class="col-2">
                             <div class="input-group">
                                 <label class="label">Ngày sinh</label>
                                 <input class="input--style-4" type="text" th:field="*{ngaySinh}">
-                                <span th:if="${#fields.hasErrors()}" th:errors="*{ngaySinh}"></span>
                             </div>
                         </div>
                     </div>
@@ -60,19 +52,30 @@
                         <div class="col-2">
                             <div class="input-group">
                                 <label class="label">Giới tính</label>
-                                <span th:if="${#fields.hasErrors()}" th:errors="*{gioiTinh}"></span>
                                 <div class="p-t-10">
                                     <label class="radio-container m-r-45">
                                         <input type="radio" checked="checked" th:field="*{gioiTinh}" th:value="Nam">
                                         <label th:for="${#ids.prev('gioiTinh')}">Nam</label>
                                         <span class="checkmark"></span>
                                     </label>
-                                    <span></span>
                                     <label class="radio-container">
                                         <input type="radio" th:field="*{gioiTinh}" th:value="Nữ">
                                         <label th:for="${#ids.prev('gioiTinh')}">Nữ</label>
                                         <span class="checkmark"></span>
                                     </label>
+<!--                                    <label class="radio-container">-->
+<!--                                        <input type="radio" th:field="*{gioiTinh}" th:value="Khác">-->
+<!--                                        <label th:for="${#ids.prev('gioiTinh')}">Khác</label>-->
+<!--                                        <span class="checkmark"></span>-->
+<!--                                    </label>-->
+                                    <!--                                    <div>-->
+                                    <!--                                        <input type="radio" th:field="*{gioiTinh}" th:value="Strategy" checked="true">-->
+                                    <!--                                        <label th:for="${#ids.prev('gioiTinh')}">Strategy</label>-->
+                                    <!--                                    </div>-->
+                                    <!--                                    <div>-->
+                                    <!--                                        <input type="radio" th:field="*{gioiTinh}" th:value="RPG">-->
+                                    <!--                                        <label th:for="${#ids.prev('gioiTinh')}">RPG</label>-->
+                                    <!--                                    </div>-->
                                 </div>
                             </div>
                         </div>
@@ -80,7 +83,6 @@
                             <div class="input-group">
                                 <label class="label">Số CMND</label>
                                 <input class="input--style-4" type="text" th:field="*{soCmnd}">
-                                <span th:if="${#fields.hasErrors()}" th:errors="*{soCmnd}"></span>
                             </div>
                         </div>
                     </div>
@@ -89,14 +91,12 @@
                             <div class="input-group">
                                 <label class="label">Số điện thoại</label>
                                 <input class="input--style-4" type="text" th:field="*{soDienThoai}">
-                                <span th:if="${#fields.hasErrors()}" th:errors="*{soDienThoai}"></span>
                             </div>
                         </div>
                         <div class="col-2">
                             <div class="input-group">
                                 <label class="label">Email</label>
                                 <input class="input--style-4" type="text" th:field="*{email}">
-                                <span th:if="${#fields.hasErrors()}" th:errors="*{email}"></span>
                             </div>
                         </div>
                     </div>
@@ -105,34 +105,30 @@
                             <div class="input-group">
                                 <label class="label">Địa chỉ</label>
                                 <input class="input--style-4" type="text" th:field="*{diaChi}">
-                                <span th:if="${#fields.hasErrors()}" th:errors="*{diaChi}"></span>
                             </div>
                         </div>
                         <div class="col-2">
                             <div class="input-group">
-                                <label class="label">Mã khách hàng</label>
-                                <input class="input--style-4" type="text" th:field="*{maKhachHang}">
-                                <span th:if="${#fields.hasErrors()}" th:errors="*{maKhachHang}"></span>
+                                <label class="label">Mã hợp đồng</label>
+                                <input class="input--style-4" type="text" name="">
                             </div>
                         </div>
                     </div>
                     <div class="input-group">
                         <label class="label">Loại khách hàng</label>
                         <div class="rs-select2 js-select-simple select--no-search">
+                            <!--                            <span class="select2-selection__rendered" id="select2-subject-yu-container" title="Choose option">Choose option</span>-->
                             <select th:field="*{loaiKhachHang.idLoaiKhachHang}">
                                 <option th:each="loai: ${listLoaiKhachHang}"
                                         th:value="${loai.idLoaiKhachHang}"
                                         th:text="${loai.tenLoaiKhachHang}">
                                 </option>
                             </select>
-                            <span th:if="${#fields.hasErrors()}" th:errors="*{loaiKhachHang}"></span>
                             <div class="select-dropdown"></div>
                         </div>
                     </div>
                     <div class="p-t-15">
                         <button class="btn btn--radius-2 btn--blue" type="submit">Đăng kí</button>
-                        <a th:href="@{/khach-hang/danh-sach}" class="btn btn-info" role="button"
-                           aria-pressed="true" style="text-decoration: none; color: #0c5460">Huỷ bỏ</a>
                     </div>
                 </form>
             </div>

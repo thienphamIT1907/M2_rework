@@ -16,7 +16,7 @@ public class TrinhDoServiceImpl implements TrinhDoService {
 
 
     @Override
-    public List<TrinhDo> findAll() {
+    public Iterable<TrinhDo> findAll() {
         return trinhDoRepository.findAll();
     }
 

@@ -15,7 +15,12 @@ public class LoaiKhachHangServiceImpl implements LoaiKhachHangService {
     LoaiKhachHangRepository loaiKhachHangRepository;
 
     @Override
-    public List<LoaiKhachHang> findAll() {
+    public Iterable<LoaiKhachHang> findAll() {
         return loaiKhachHangRepository.findAll();
+    }
+
+    @Override
+    public LoaiKhachHang timTheoId(Long id) {
+        return loaiKhachHangRepository.findById(id).orElse(null);
     }
 }

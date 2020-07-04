@@ -1,8 +1,12 @@
 package com.models.KhachHangModels;
 
 import com.models.DichVuModels.HopDong;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -21,31 +25,48 @@ public class KhachHang {
     @OneToMany(targetEntity = HopDong.class, mappedBy = "khachHang")
     private List<HopDong> listHopDong;
 
+    @NotEmpty(message = "Không để trống !")
     @Column
     private String hoTen;
 
+    @NotNull(message = "Không để trống !")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE, pattern = "dd/MM/yyyy")
     @Column
     LocalDate ngaySinh;
 
+    @NotEmpty(message = "Không để trống !")
     @Column
     private String gioiTinh;
 
+    @NotEmpty(message = "Không để trống !")
+    @Pattern(regexp = "^((\\d{9})|(\\d{12}))$", message = "9 hoặc 12 số!")
     @Column
     private String soCmnd;
 
+    @NotEmpty(message = "Không để trống !")
+    @Pattern(regexp = "^(0|\\(84\\)\\+)9(0|1)\\d{7}", message = "[090/091/(84)+90/(84)+91] xxxxxxx")
     @Column
     private String soDienThoai;
 
+    @NotEmpty(message = "Không để trống !")
+    @Pattern(regexp = "^[a-zA-Z0-9]+@[a-z]+.com$", message = "Email sai định dạng!")
     @Column
     private String email;
 
+    @NotEmpty(message = "Không để trống !")
     @Column
     private String diaChi;
+
+    @NotEmpty(message = "Không để trống !")
+    @Pattern(regexp = "^KH-\\d{4}$", message = "Định dạng KH-XXXX!")
+    @Column
+    private String maKhachHang;
 
     public KhachHang() {
     }
 
-    public KhachHang(String hoTen, LocalDate ngaySinh, String gioiTinh, String soCmnd, String soDienThoai, String email, String diaChi) {
+    public KhachHang(String hoTen, LocalDate ngaySinh, String gioiTinh, String soCmnd, String soDienThoai,
+                     String email, String diaChi, String maKhachHang) {
         this.hoTen = hoTen;
         this.ngaySinh = ngaySinh;
         this.gioiTinh = gioiTinh;
@@ -53,6 +74,7 @@ public class KhachHang {
         this.soDienThoai = soDienThoai;
         this.email = email;
         this.diaChi = diaChi;
+        this.maKhachHang = maKhachHang;
     }
 
     public Long getIdKhachHang() {
@@ -133,6 +155,14 @@ public class KhachHang {
 
     public void setDiaChi(String diaChi) {
         this.diaChi = diaChi;
+    }
+
+    public String getMaKhachHang() {
+        return maKhachHang;
+    }
+
+    public void setMaKhachHang(String maKhachHang) {
+        this.maKhachHang = maKhachHang;
     }
 
     @Override

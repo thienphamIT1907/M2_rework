@@ -1,106 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Furama Resort Management</title>
-    <link rel="stylesheet" href="/layout/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/layout/css/dashboard.css" />
-    <script src="/layout/js/jquery-3.5.0.min.js"></script>
-    <script src="/layout/js/bootstrap.min.js"></script>
-    <script src="/layout/js/dashboard.js"></script>
-</head>
+<head th:replace="layout::head"></head>
 <body>
 
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Furama Resort</a>
-    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-    <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-            <a class="nav-link" href="#">Đăng xuất</a>
-        </li>
-    </ul>
 </nav>
 
 <div class="container-fluid">
     <div class="row">
-        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-            <div class="sidebar-sticky">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">
-                            <span data-feather="home"></span>
-                            Dashboard <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="file"></span>
-                            Orders
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="shopping-cart"></span>
-                            Products
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="users"></span>
-                            Customers
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="bar-chart-2"></span>
-                            Reports
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="layers"></span>
-                            Integrations
-                        </a>
-                    </li>
-                </ul>
-
-                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                    <span>Saved reports</span>
-                    <a class="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
-                        <span data-feather="plus-circle"></span>
-                    </a>
-                </h6>
-                <ul class="nav flex-column mb-2">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="file-text"></span>
-                            Current month
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="file-text"></span>
-                            Last quarter
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="file-text"></span>
-                            Social engagement
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="file-text"></span>
-                            Year-end sale
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+        <nav th:replace="layout::left-menu"></nav>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Dashboard</h1>
+                <h1 class="h2">Danh sách khách hàng</h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
                         <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -112,7 +25,10 @@
                     </button>
                 </div>
             </div>
-            <h2>Danh sách khách hàng</h2>
+            <form th:action="@{/khach-hang/danh-sach}" method="get">
+                <div th:replace="layout::search-form"></div>
+            </form>
+
             <th:block th:if="${message}">
                 <div class="alert alert-success" role="alert">
                     <p th:text="${message}"></p>
@@ -121,7 +37,17 @@
 
             <br>
 
-            <a class="btn btn-info" th:href="@{/khach-hang/them}" style="margin-bottom: 30px">Thêm mới khách hàng</a>
+            <a class="btn btn-info my-custom-btn" th:href="@{/khach-hang/them}" style="margin-bottom: 30px">Thêm mới khách hàng</a>
+
+            <br>
+
+            <div>
+                <a th:href="@{/khach-hang/danh-sach(keyword=${keyword},page=${listKhachHang.number - 1})}"
+                   th:if="${listKhachHang.hasPrevious()}">Previous
+                </a>
+                <span th:text="${listKhachHang.number + 1}"></span>/<span th:text="${listKhachHang.totalPages}"></span>
+                <a th:href="@{/khach-hang/danh-sach/(keyword=${keyword},page=${listKhachHang.number + 1})}" th:if="${listKhachHang.hasNext()}">Next</a>
+            </div>
 
             <br>
 
@@ -129,7 +55,8 @@
                 <table class="table table-striped table-sm">
                     <thead>
                     <tr>
-                        <th>Id</th>
+                        <th>ID</th>
+                        <th>Mã KH</th>
                         <th>Họ tên</th>
                         <th>Ngày sinh</th>
                         <th>Giới tính</th>
@@ -145,6 +72,7 @@
                     <th:block th:each="khachHang : ${listKhachHang}">
                         <tr>
                             <td th:text="${khachHang.idKhachHang}"></td>
+                            <td th:text="${khachHang.maKhachHang}"></td>
                             <td th:text="${khachHang.hoTen}"></td>
                             <td th:text="${khachHang.ngaySinh}"></td>
                             <td th:text="${khachHang.gioiTinh}"></td>

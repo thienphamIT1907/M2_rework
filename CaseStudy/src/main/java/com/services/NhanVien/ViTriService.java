@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ViTriService {
 
-    List<ViTri> findAll();
+    Iterable<ViTri> findAll();
 
     void them(ViTri viTri);
 

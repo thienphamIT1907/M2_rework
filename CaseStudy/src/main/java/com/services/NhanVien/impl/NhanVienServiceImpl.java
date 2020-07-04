@@ -16,7 +16,7 @@ public class NhanVienServiceImpl implements NhanVienService {
     NhanVienRepository nhanVienRepository;
 
     @Override
-    public List<NhanVien> findAll() {
+    public Iterable<NhanVien> findAll() {
         return nhanVienRepository.findAll();
     }
 

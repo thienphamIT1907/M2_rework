@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface BoPhanService {
 
-    List<BoPhan> findAll();
+    Iterable<BoPhan> findAll();
 
     void them(BoPhan boPhan);
 

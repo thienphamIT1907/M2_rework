@@ -4,6 +4,8 @@ import com.models.KhachHangModels.KhachHang;
 import com.models.NhanVienModels.NhanVien;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -27,7 +29,7 @@ public class HopDong {
     @JoinColumn(name = "id_dich_vu")
     private DichVu dichVu;
 
-    @OneToMany(targetEntity = HopDongChiTiet.class, mappedBy = "hopDong")
+    @OneToMany(targetEntity = HopDongChiTiet.class, mappedBy = "hopDong", cascade = CascadeType.ALL)
     private List<HopDongChiTiet> listHopDongChiTiet;
 
     @Column
@@ -37,9 +39,13 @@ public class HopDong {
     private LocalDate ngayKetThuc;
 
     @Column
+    @NotNull(message = "Không được để trống")
+    @Min(value = 0, message = "Tiền cọc > 0")
     private Long tienCoc;
 
     @Column
+    @NotNull(message = "Không được để trống")
+    @Min(value = 0, message = "Tổng tiền > 0")
     private Long tongThanhToan;
 
     public HopDong() {

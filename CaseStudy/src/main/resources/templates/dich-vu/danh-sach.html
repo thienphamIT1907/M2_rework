@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout::head"></head>
+<body>
+
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Furama Resort</a>
+    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+    <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+            <a class="nav-link" href="#">Đăng xuất</a>
+        </li>
+    </ul>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <nav th:replace="layout::left-menu"></nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Danh sách dịch vụ</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="btn-group mr-2">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                        <span data-feather="calendar"></span>
+                        This week
+                    </button>
+                </div>
+            </div>
+            <form th:action="@{/dich-vu/danh-sach}" method="get">
+                <div th:replace="layout::search-form"></div>
+            </form>
+            <th:block th:if="${message}">
+                <div class="alert alert-success" role="alert">
+                    <p th:text="${message}"></p>
+                </div>
+            </th:block>
+
+            <br>
+
+            <a class="btn btn-info my-custom-btn" th:href="@{/dich-vu/them}" style="margin-bottom: 30px">Thêm mới dịch vụ</a>
+
+            <br>
+
+            <div>
+                <a th:href="@{/dich-vu/danh-sach(keyword=${keyword},page=${listDichVu.number - 1})}"
+                   th:if="${listDichVu.hasPrevious()}">Previous
+                </a>
+                <span th:text="${listDichVu.number + 1}"></span>/<span th:text="${listDichVu.totalPages}"></span>
+                <a th:href="@{/dich-vu/danh-sach/(keyword=${keyword},page=${listDichVu.number + 1})}"
+                   th:if="${listDichVu.hasNext()}">Next</a>
+            </div>
+
+            <br>
+
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Mã DV</th>
+                        <th>Tên DV</th>
+                        <th>DT sử dụng</th>
+                        <th>Chi phí thuê</th>
+                        <th>Số người</th>
+                        <th>Tiêu chuẩn</th>
+                        <th>Mô tả</th>
+                        <th>DT hồ bơi</th>
+                        <th>Số tầng</th>
+                        <th>Trạng thái</th>
+                        <th>Loại DV</th>
+                        <th>Kiểu thuê</th>
+                        <th>Xử lý</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <th:block th:each="dichVu : ${listDichVu}">
+                        <tr>
+                            <td th:text="${dichVu.idDichVu}"></td>
+                            <td th:text="${dichVu.maDichVu}"></td>
+                            <td th:text="${dichVu.tenDichVu}"></td>
+                            <td th:text="${dichVu.dienTichSuDung}"></td>
+                            <td th:text="${dichVu.chiPhiThue}"></td>
+                            <td th:text="${dichVu.soNguoiToiDa}"></td>
+                            <td th:text="${dichVu.tieuChuanPhong}"></td>
+                            <td th:text="${dichVu.moTaTienNghiKhac}"></td>
+                            <td th:text="${dichVu.dienTichHoBoi}"></td>
+                            <td th:text="${dichVu.soTang}"></td>
+                            <td th:text="${dichVu.trangThai}"></td>
+                            <td th:text="${dichVu.loaiDichVu.tenLoaiDichVu}"></td>
+                            <td th:text="${dichVu.kieuThue.tenKieuThue}"></td>
+                            <td><a class="btn btn-danger"
+                                   th:href="@{'/dich-vu/sua'(id=${dichVu.idDichVu})}">Sửa</a></td>
+                            <td><a class="btn btn-danger" onclick="return confirm_delete()"
+                                   th:href="@{'/dich-vu/xoa'(id=${dichVu.idDichVu})}">Xoá</a></td>
+                        </tr>
+                    </th:block>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</div>
+<script type="text/javascript">
+    function confirm_delete()
+    {
+        return confirm("Bạn chắc chắn muốn xoá dịch vụ này ?");
+    }
+</script>
+</body>
+</html>
