@@ -51,7 +51,7 @@
                             <div class="input-group">
                                 <label class="label">Ngày sinh</label>
                                 <input class="input--style-4" type="text" th:field="*{ngaySinh}">
-                                <span th:if="${#fields.hasErrors()}" th:errors="*{ngaySinh}"></span>
+                                <span th:if="${#fields.hasErrors('ngaySinh')}" th:errors="*{ngaySinh}"></span>
                             </div>
                         </div>
                     </div>

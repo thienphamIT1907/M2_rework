@@ -61,6 +61,7 @@ public class KhachHangController {
             @Validated @ModelAttribute KhachHang khachHang,
             BindingResult bindingResult
     ) {
+        new KhachHang().validate(khachHang, bindingResult);
         if(bindingResult.hasFieldErrors()) {
             return "khach-hang/them";
         } else {

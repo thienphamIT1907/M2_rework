@@ -2,6 +2,9 @@ package com.models.KhachHangModels;
 
 import com.models.DichVuModels.HopDong;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
+import org.springframework.validation.Validator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -12,7 +15,7 @@ import java.util.List;
 
 @Entity
 @Table
-public class KhachHang {
+public class KhachHang implements Validator {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,9 +32,10 @@ public class KhachHang {
     @Column
     private String hoTen;
 
-    @NotNull(message = "Không để trống !")
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE, pattern = "dd/MM/yyyy")
+//    @NotNull(message = "Không để trống !")
     @Column
+    @NotNull
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     LocalDate ngaySinh;
 
     @NotEmpty(message = "Không để trống !")
@@ -179,5 +183,26 @@ public class KhachHang {
                 ", email='" + email + '\'' +
                 ", diaChi='" + diaChi + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+
+        KhachHang khachHang = (KhachHang) target;
+
+        LocalDate ngaySinh = khachHang.getNgaySinh();
+
+        if(ngaySinh!= null) {
+            if (!ngaySinh.toString().matches("^((0)[1-9]|[1-2][0-9]|(3)[0-1])(\\/)((0)[1-9]|((1)[0-2]))(\\/)\\d{4}$")) {
+                errors.rejectValue("ngaySinh", "date.format");
+            }
+        } else {
+            ValidationUtils.rejectIfEmpty(errors, "ngaySinh", "date.empty");
+        }
     }
 }
