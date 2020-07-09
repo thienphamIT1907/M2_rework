@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+
+    <!-- Title Page-->
+    <title>Employee Management</title>
+
+    <!-- Icons font CSS-->
+    <link href="/form/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="/form/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Vendor CSS-->
+    <link href="/form/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="/form/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="/form/css/main.css" rel="stylesheet" media="all">
+
+    <style th:fragment="span-error">
+        span {
+            color: #e25d5d;
+        }
+    </style>
+</head>
+
+<body>
+<div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+    <div class="wrapper wrapper--w680">
+        <div class="card card-4">
+            <div class="card-body">
+                <h2 class="title">Create new Employee</h2>
+                <form th:action="@{/save}" method="post" th:object="${employee}">
+                    <div class="row row-space">
+                        <div class="col-2">
+                            <div class="input-group">
+                                <label class="label">Name</label>
+                                <input class="input--style-4" type="text" th:field="*{name}">
+                                <span th:if="${#fields.hasErrors()}" th:errors="*{name}"></span>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="input-group">
+                                <label class="label">Employee Group</label>
+                                <div class="rs-select2 js-select-simple select--no-search">
+                                    <select th:field="*{employeeGroup}">
+                                        <option value="Lễ tân">Reception</option>
+                                        <option value="Buồng phòng">Room cleaner</option>
+                                        <option value="Buồng phòng">Hotel Master</option>
+                                        <option value="Buồng phòng">Rules Master</option>
+                                    </select>
+<!--                                    <span th:if="${#fields.hasErrors()}" th:errors="*{employeeGroup}"></span>-->
+                                    <div class="select-dropdown"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row row-space">
+                        <div class="col-2">
+                            <div class="input-group">
+                                <label class="label">Birthday</label>
+                                <input class="input--style-4" type="date" th:field="*{birthday}">
+                                <span th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}"></span>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="input-group">
+                                <label class="label">Gender</label>
+                                <input class="input--style-4" type="text" th:field="*{gender}">
+                                <span th:if="${#fields.hasErrors()}" th:errors="*{gender}"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-space">
+                        <div class="col-2">
+                            <div class="input-group">
+                                <label class="label">Phone number</label>
+                                <input class="input--style-4" type="text" th:field="*{phoneNumber}">
+                                <span th:if="${#fields.hasErrors()}" th:errors="*{phoneNumber}"></span>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="input-group">
+                                <label class="label">Cmnd</label>
+                                <input class="input--style-4" type="text" th:field="*{cmnd}">
+                                <span th:if="${#fields.hasErrors()}" th:errors="*{cmnd}"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-space">
+                        <div class="col-2">
+                            <div class="input-group">
+                                <label class="label">Email</label>
+                                <input class="input--style-4" type="text" th:field="*{email}">
+                                <span th:if="${#fields.hasErrors()}" th:errors="*{email}"></span>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="input-group">
+                                <label class="label">Address</label>
+                                <input class="input--style-4" type="text" th:field="*{address}">
+                                <span th:if="${#fields.hasErrors()}" th:errors="*{address}"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-t-15">
+                        <button class="btn btn--radius-2 btn--blue" type="submit">Create</button>
+<!--                        <input type="submit" value="Create">-->
+                        <a th:href="@{/list}" class="btn btn-info" role="button"
+                           aria-pressed="true" style="text-decoration: none; color: #0c5460">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Jquery JS-->
+<script src="/form/vendor/jquery/jquery.min.js"></script>
+<!-- Vendor JS-->
+<script src="/form/vendor/select2/select2.min.js"></script>
+<script src="/form/vendor/datepicker/moment.min.js"></script>
+<script src="/form/vendor/datepicker/daterangepicker.js"></script>
+
+<!-- Main JS-->
+<script src="/form/js/global.js"></script>
+
+</body>
+
+</html>
+<!-- end document-->

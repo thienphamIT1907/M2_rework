@@ -62,6 +62,7 @@ public class KhachHangController {
             BindingResult bindingResult
     ) {
         new KhachHang().validate(khachHang, bindingResult);
+        System.out.println(khachHang.toString());
         if(bindingResult.hasFieldErrors()) {
             return "khach-hang/them";
         } else {

@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 @Controller
 @RequestMapping("/hop-dong")
 public class HopDongController {
@@ -56,9 +60,30 @@ public class HopDongController {
     }
 
     @PostMapping("/them")
-    public String themMoiHopDong(@ModelAttribute HopDong hopDong, RedirectAttributes redirectAttributes) {
+    public String themMoiHopDong(
+            @ModelAttribute HopDong hopDong,
+            RedirectAttributes redirectAttributes,
+            HttpServletRequest request,
+            HttpServletResponse response
+    ) {
         hopDongService.them(hopDong);
         System.out.println(hopDong.toString());
+
+        Iterable<HopDong> listHopDong = hopDongService.findAllByKhachHang_IdKhachHang((long) 1);
+        for(HopDong hd: listHopDong) {
+            String cookieValue =
+                    hd.getKhachHang().getIdKhachHang() + "_" +
+                    hd.getDichVu().getIdDichVu() + "_" +
+                    hd.getNgayBatDau() + "_" +
+                    hd.getNgayKetThuc();
+
+            Cookie cookie = new Cookie("hopDong " + hd.getIdHopDong(), cookieValue);
+            cookie.setMaxAge(60*60);
+            cookie.setPath("/lichSuGiaoDich");
+
+            response.addCookie(cookie);
+        }
+
         redirectAttributes.addFlashAttribute("message", "Tạo mới hợp đồng thành công !");
         return "redirect:/hop-dong/danh-sach";
     }

@@ -1,7 +1,9 @@
 package com.repositories.DichVu;
 
 import com.models.DichVuModels.HopDong;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface HopDongRepository extends JpaRepository<HopDong, Long> {
+public interface HopDongRepository extends PagingAndSortingRepository<HopDong, Long> {
+
+    Iterable<HopDong> findAllByKhachHang_IdKhachHang(Long id);
 }

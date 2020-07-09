@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/home-style/style.css">
+    <title>Final Examination Module 2</title>
+</head>
+<body>
+<div class="header">
+    <h1>Click one to start !</h1>
+    <span id="mine">Pham Anh Thien - C0220H</span>
+</div>
+
+<div>
+    <a href="#" onclick="clickA()">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Start
+    </a>
+    <a href="#" onclick="clickB()">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Start
+    </a>
+    <a href="" onclick="clickC()">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Start
+    </a>
+</div>
+<a id="real-start" th:href="@{/menu}">This is start :p</a>
+
+<script>
+    function clickA() {
+        alert('I really want to pass this module! :(')
+    }
+
+    function clickB() {
+        alert('please review me easily, thank so much :3')
+    }
+
+    function clickC() {
+        alert('You are my best examiner!')
+    }
+</script>
+</body>
+</html>

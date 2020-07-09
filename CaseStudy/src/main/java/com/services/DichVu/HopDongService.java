@@ -12,4 +12,6 @@ public interface HopDongService {
 
     void xoaTheoId(Long id);
 
+    Iterable<HopDong> findAllByKhachHang_IdKhachHang(Long id);
+
 }

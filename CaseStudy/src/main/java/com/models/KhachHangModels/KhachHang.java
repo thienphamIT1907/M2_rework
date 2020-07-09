@@ -1,20 +1,26 @@
 package com.models.KhachHangModels;
 
 import com.models.DichVuModels.HopDong;
-import org.springframework.format.annotation.DateTimeFormat;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.time.LocalDate;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Entity
 @Table
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class KhachHang implements Validator {
 
     @Id
@@ -32,11 +38,9 @@ public class KhachHang implements Validator {
     @Column
     private String hoTen;
 
-//    @NotNull(message = "Không để trống !")
+    @NotEmpty(message = "Không để trống !")
     @Column
-    @NotNull
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    LocalDate ngaySinh;
+    String ngaySinh;
 
     @NotEmpty(message = "Không để trống !")
     @Column
@@ -66,108 +70,108 @@ public class KhachHang implements Validator {
     @Column
     private String maKhachHang;
 
-    public KhachHang() {
-    }
+//    public KhachHang() {
+//    }
+//
+//    public KhachHang(String hoTen, String ngaySinh, String gioiTinh, String soCmnd, String soDienThoai,
+//                     String email, String diaChi, String maKhachHang) {
+//        this.hoTen = hoTen;
+//        this.ngaySinh = ngaySinh;
+//        this.gioiTinh = gioiTinh;
+//        this.soCmnd = soCmnd;
+//        this.soDienThoai = soDienThoai;
+//        this.email = email;
+//        this.diaChi = diaChi;
+//        this.maKhachHang = maKhachHang;
+//    }
 
-    public KhachHang(String hoTen, LocalDate ngaySinh, String gioiTinh, String soCmnd, String soDienThoai,
-                     String email, String diaChi, String maKhachHang) {
-        this.hoTen = hoTen;
-        this.ngaySinh = ngaySinh;
-        this.gioiTinh = gioiTinh;
-        this.soCmnd = soCmnd;
-        this.soDienThoai = soDienThoai;
-        this.email = email;
-        this.diaChi = diaChi;
-        this.maKhachHang = maKhachHang;
-    }
-
-    public Long getIdKhachHang() {
-        return idKhachHang;
-    }
-
-    public void setIdKhachHang(Long idKhachHang) {
-        this.idKhachHang = idKhachHang;
-    }
-
-    public LoaiKhachHang getLoaiKhachHang() {
-        return loaiKhachHang;
-    }
-
-    public void setLoaiKhachHang(LoaiKhachHang loaiKhachHang) {
-        this.loaiKhachHang = loaiKhachHang;
-    }
-
-    public List<HopDong> getListHopDong() {
-        return listHopDong;
-    }
-
-    public void setListHopDong(List<HopDong> listHopDong) {
-        this.listHopDong = listHopDong;
-    }
-
-    public String getHoTen() {
-        return hoTen;
-    }
-
-    public void setHoTen(String hoTen) {
-        this.hoTen = hoTen;
-    }
-
-    public LocalDate getNgaySinh() {
-        return ngaySinh;
-    }
-
-    public void setNgaySinh(LocalDate ngaySinh) {
-        this.ngaySinh = ngaySinh;
-    }
-
-    public String getGioiTinh() {
-        return gioiTinh;
-    }
-
-    public void setGioiTinh(String gioiTinh) {
-        this.gioiTinh = gioiTinh;
-    }
-
-    public String getSoCmnd() {
-        return soCmnd;
-    }
-
-    public void setSoCmnd(String soCmnd) {
-        this.soCmnd = soCmnd;
-    }
-
-    public String getSoDienThoai() {
-        return soDienThoai;
-    }
-
-    public void setSoDienThoai(String soDienThoai) {
-        this.soDienThoai = soDienThoai;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getDiaChi() {
-        return diaChi;
-    }
-
-    public void setDiaChi(String diaChi) {
-        this.diaChi = diaChi;
-    }
-
-    public String getMaKhachHang() {
-        return maKhachHang;
-    }
-
-    public void setMaKhachHang(String maKhachHang) {
-        this.maKhachHang = maKhachHang;
-    }
+//    public Long getIdKhachHang() {
+//        return idKhachHang;
+//    }
+//
+//    public void setIdKhachHang(Long idKhachHang) {
+//        this.idKhachHang = idKhachHang;
+//    }
+//
+//    public LoaiKhachHang getLoaiKhachHang() {
+//        return loaiKhachHang;
+//    }
+//
+//    public void setLoaiKhachHang(LoaiKhachHang loaiKhachHang) {
+//        this.loaiKhachHang = loaiKhachHang;
+//    }
+//
+//    public List<HopDong> getListHopDong() {
+//        return listHopDong;
+//    }
+//
+//    public void setListHopDong(List<HopDong> listHopDong) {
+//        this.listHopDong = listHopDong;
+//    }
+//
+//    public String getHoTen() {
+//        return hoTen;
+//    }
+//
+//    public void setHoTen(String hoTen) {
+//        this.hoTen = hoTen;
+//    }
+//
+//    public String getNgaySinh() {
+//        return ngaySinh;
+//    }
+//
+//    public void setNgaySinh(String ngaySinh) {
+//        this.ngaySinh = ngaySinh;
+//    }
+//
+//    public String getGioiTinh() {
+//        return gioiTinh;
+//    }
+//
+//    public void setGioiTinh(String gioiTinh) {
+//        this.gioiTinh = gioiTinh;
+//    }
+//
+//    public String getSoCmnd() {
+//        return soCmnd;
+//    }
+//
+//    public void setSoCmnd(String soCmnd) {
+//        this.soCmnd = soCmnd;
+//    }
+//
+//    public String getSoDienThoai() {
+//        return soDienThoai;
+//    }
+//
+//    public void setSoDienThoai(String soDienThoai) {
+//        this.soDienThoai = soDienThoai;
+//    }
+//
+//    public String getEmail() {
+//        return email;
+//    }
+//
+//    public void setEmail(String email) {
+//        this.email = email;
+//    }
+//
+//    public String getDiaChi() {
+//        return diaChi;
+//    }
+//
+//    public void setDiaChi(String diaChi) {
+//        this.diaChi = diaChi;
+//    }
+//
+//    public String getMaKhachHang() {
+//        return maKhachHang;
+//    }
+//
+//    public void setMaKhachHang(String maKhachHang) {
+//        this.maKhachHang = maKhachHang;
+//    }
 
     @Override
     public String toString() {
@@ -195,14 +199,20 @@ public class KhachHang implements Validator {
 
         KhachHang khachHang = (KhachHang) target;
 
-        LocalDate ngaySinh = khachHang.getNgaySinh();
+        //regex valid date : ^((0)[1-9]|[1-2][0-9]|(3)[0-1])(\/)((0)[1-9]|((1)[0-2]))(\/)\d{4}$
+        String ngaySinh = khachHang.getNgaySinh();
 
-        if(ngaySinh!= null) {
-            if (!ngaySinh.toString().matches("^((0)[1-9]|[1-2][0-9]|(3)[0-1])(\\/)((0)[1-9]|((1)[0-2]))(\\/)\\d{4}$")) {
-                errors.rejectValue("ngaySinh", "date.format");
+        if (!ngaySinh.isEmpty()) {
+            if(!ngaySinh.matches("^\\d{4}-\\d{2}-\\d{2}$")){ // => ("yyyy-MM-dd")
+                errors.rejectValue("birthday", "birthday.format");
+            } else {
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd"); //pattern to save DB
+                try {
+                    simpleDateFormat.parse(ngaySinh);
+                } catch (ParseException e) {
+                    errors.rejectValue("birthday", "birthday.format");
+                }
             }
-        } else {
-            ValidationUtils.rejectIfEmpty(errors, "ngaySinh", "date.empty");
         }
     }
 }

@@ -31,4 +31,9 @@ public class HopDongServiceImpl implements HopDongService {
     public void xoaTheoId(Long id) {
         hopDongRepository.deleteById(id);
     }
+
+    @Override
+    public Iterable<HopDong> findAllByKhachHang_IdKhachHang(Long id) {
+        return hopDongRepository.findAllByKhachHang_IdKhachHang(id);
+    }
 }
